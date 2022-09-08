@@ -1,5 +1,8 @@
 name: CD
-on: push
+on:
+  push:
+    paths:
+      - website/**
 jobs:
   deploy-prod:
     name: deploy prod
