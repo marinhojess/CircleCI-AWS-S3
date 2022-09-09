@@ -6,7 +6,7 @@ on:
     paths:
       - website/**
 env:
-  RELEASE_DOCS_BRANCH: preprod
+  RELEASE_DOCS_BRANCH: refs/heads/preprod
 
 jobs:
   build:
@@ -29,7 +29,7 @@ jobs:
     name: Deploy Preprod
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/${{ env.RELEASE_DOCS_BRANCH }}'
+    if: github.ref == ${{ env.RELEASE_DOCS_BRANCH }}
     steps:
     - uses: actions/checkout@master
     - uses: actions/download-artifact@master
@@ -50,7 +50,7 @@ jobs:
     name: Invalidate CloudFront
     needs: [build, deploy-preprod]
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/${{ env.RELEASE_DOCS_BRANCH }}'
+    if: github.ref == ${{ env.RELEASE_DOCS_BRANCH }}
     steps:
     - uses: chetan/invalidate-cloudfront-action@v2
       env:
