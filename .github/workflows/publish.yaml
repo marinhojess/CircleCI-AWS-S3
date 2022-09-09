@@ -4,7 +4,7 @@ on:
     branches: 
       - preprod
     paths:
-      - docs/**
+      - website/**
 jobs:
   build:
     name: Build Docs
