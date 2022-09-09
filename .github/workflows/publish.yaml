@@ -20,6 +20,7 @@ jobs:
 
   deploy-preprod:
     name: Deploy Preprod
+    needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/preprod'
     steps:
@@ -36,6 +37,7 @@ jobs:
 
   deploy-cloudfront:
     name: Invalidate CloudFront
+    needs: [build, deploy-preprod]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/preprod'
     steps:
